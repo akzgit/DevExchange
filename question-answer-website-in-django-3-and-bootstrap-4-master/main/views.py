@@ -160,4 +160,8 @@ def tags(request):
         tag_with_count.append(tag_data)
     return render(request,'tags.html',{'tags':tag_with_count})
         
+
+def test(request):
+    return render(request,'test.html',{})
+
         
