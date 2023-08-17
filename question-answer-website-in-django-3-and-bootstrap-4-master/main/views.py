@@ -6,6 +6,7 @@ from django.contrib import messages
 from .forms import AnswerForm,QuestionForm,ProfileForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required
 # Home Page
 def home(request):
     if 'q' in request.GET:
@@ -54,6 +55,7 @@ def save_comment(request):
         return JsonResponse({'bool':True})
 
 # Save Upvote
+@login_required
 def save_upvote(request):
     if request.method=='POST':
         answerid=request.POST['answerid']
@@ -70,6 +72,7 @@ def save_upvote(request):
             return JsonResponse({'bool':True})
 
 # Save Downvote
+@login_required
 def save_downvote(request):
     if request.method=='POST':
         answerid=request.POST['answerid']
