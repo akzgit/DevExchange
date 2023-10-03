@@ -8,7 +8,16 @@ admin.site.register(Question,QuestionAdmin)
 admin.site.register(Answer)
 
 
-admin.site.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display=('answer','comment')
+admin.site.register(Comment,CommentAdmin)
 
-admin.site.register(UpVote)
-admin.site.register(DownVote)
+class UpvoteAdmin(admin.ModelAdmin):
+    list_display=('answer','user')
+admin.site.register(UpVote,UpvoteAdmin)
+
+class DownvoteAdmin(admin.ModelAdmin):
+    list_display=('answer','user')
+admin.site.register(DownVote,DownvoteAdmin)
+
+admin.site.register(CustomUser)
