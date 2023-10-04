@@ -172,7 +172,7 @@ def tags(request):
 
 #AI part      
         
-openai_api_key = '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'
+openai_api_key = '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'
 openai.api_key = openai_api_key
 
 def ask_openai(message):
@@ -182,7 +182,7 @@ def ask_openai(message):
         max_tokens=150,
         n=1,
         stop=None,
-        temprature=0.7,       
+        temperature=0.7,       
     )
     
     answer = response.choices[0].text.strip()
