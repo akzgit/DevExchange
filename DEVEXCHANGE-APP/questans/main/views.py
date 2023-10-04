@@ -172,7 +172,7 @@ def tags(request):
 
 #AI part      
         
-openai_api_key = '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'
+openai_api_key = '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'
 openai.api_key = openai_api_key
 
 def ask_openai(message):
