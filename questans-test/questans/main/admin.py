@@ -20,4 +20,4 @@ class DownvoteAdmin(admin.ModelAdmin):
     list_display=('answer','user')
 admin.site.register(DownVote,DownvoteAdmin)
 
-admin.site.register(CustomUser)
+# admin.site.register(CustomUser)

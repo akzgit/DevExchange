@@ -1,5 +1,6 @@
 from django.forms import ModelForm
-from .models import Answer,Question,CustomUser
+from .models import Answer,Question
+from django.contrib.auth.models import User
 
 class AnswerForm(ModelForm):
     class Meta:
@@ -13,5 +14,5 @@ class QuestionForm(ModelForm):
 
 class ProfileForm(ModelForm):
     class Meta:
-        model=CustomUser
-        fields=('first_name','last_name','username','bio','location')
+        model=User
+        fields=('first_name','last_name','username')
