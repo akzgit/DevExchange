@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from django.http import JsonResponse
 from . models import Question,Answer,Comment,UpVote,DownVote
 from django.core.paginator import Paginator
@@ -6,6 +6,14 @@ from django.contrib import messages
 from .forms import AnswerForm,QuestionForm,ProfileForm
 from django.db.models import Count
 from django.contrib.auth.forms import UserCreationForm
+import openai
+
+
+from django.contrib import auth
+from django.contrib.auth.models import User
+from .models import Chat
+
+from django.utils import timezone
 
 # Home Page
 def home(request):
@@ -161,4 +169,34 @@ def tags(request):
         }
         tag_with_count.append(tag_data)
     return render(request,'tags.html',{'tags':tag_with_count})
+
+#AI part      
         
+openai_api_key = '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'
+openai.api_key = openai_api_key
+
+def ask_openai(message):
+    response = openai.Completion.create(
+        model = "text-davinci-003",
+        prompt=message,
+        max_tokens=150,
+        n=1,
+        stop=None,
+        temprature=0.7,       
+    )
+    
+    answer = response.choices[0].text.strip()
+    return answer
+
+# Create your views here.
+def chatbot(request):
+    chats = Chat.objects.filter(user=request.user)
+
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        response = ask_openai(message)
+
+        chat = Chat(user=request.user, message=message, response=response, created_at=timezone.now())
+        chat.save()
+        return JsonResponse({'message': message, 'response': response})
+    return render(request, 'chatbot.html', {'chats': chats})        

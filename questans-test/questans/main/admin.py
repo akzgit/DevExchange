@@ -21,3 +21,5 @@ class DownvoteAdmin(admin.ModelAdmin):
 admin.site.register(DownVote,DownvoteAdmin)
 
 # admin.site.register(CustomUser)
+
+admin.site.register(Chat)

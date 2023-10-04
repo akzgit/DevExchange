@@ -16,6 +16,8 @@ urlpatterns=[
     path('accounts/profile/',views.profile,name='profile'),
     # Tags Page
     path('tags',views.tags,name='tags'),
+    
+    path('chatbot', views.chatbot, name='chatbot'),
 
     
 
